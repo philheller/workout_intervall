@@ -39,20 +39,20 @@ class _LandingPageState extends State<LandingPage>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: <Color>[
-            Color.fromRGBO(180, 180, 180, 1),
-            Color.fromRGBO(250, 250, 250, 1)
-          ],
-          begin: Alignment.bottomLeft,
-          end: Alignment.topCenter,
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: <Color>[
+              Color.fromRGBO(180, 180, 180, 1),
+              Color.fromRGBO(250, 250, 250, 1)
+            ],
+            begin: Alignment.bottomLeft,
+            end: Alignment.topCenter,
+          ),
         ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Column(
+        child: Column(
           children: <Widget>[
             CustomAppBar(
               title: "Work harder!",
@@ -74,9 +74,6 @@ class _LandingPageState extends State<LandingPage>
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: CounterClock(),
             ),
-            // SizedBox(
-            //   height: 50,
-            // ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 30.0),
