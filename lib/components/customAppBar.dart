@@ -3,21 +3,23 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget {
   final String title;
   final String secondaryMsg;
-  CustomAppBar({@required this.title, this.secondaryMsg});
+  final double height;
+  CustomAppBar(
+      {@required this.title, @required this.height, this.secondaryMsg});
 
   List<Widget> _createWidgetList(title, msg) {
     List<Widget> customList = [];
     customList.add(Text(
       this.title,
       style: TextStyle(
-          fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+          fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
     ));
     if (secondaryMsg != null) {
       customList.add(
         Text(
           this.secondaryMsg,
           style: TextStyle(
-              fontSize: 20,
+              fontSize: 25,
               fontWeight: FontWeight.w300,
               letterSpacing: 3,
               color: Colors.white),
@@ -34,12 +36,12 @@ class CustomAppBar extends StatelessWidget {
     return ClipPath(
       clipper: LinePath(),
       child: Container(
-        height: 250,
+        height: MediaQuery.of(context).size.height * this.height,
         alignment: Alignment.topLeft,
         decoration: BoxDecoration(
             gradient: RadialGradient(
                 center: Alignment.bottomLeft,
-                radius: 2.1,
+                radius: 1.95,
                 stops: [
               0.25,
               0.7,
@@ -57,7 +59,7 @@ class CustomAppBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: widgetList,

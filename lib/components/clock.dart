@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class CounterClock extends StatefulWidget {
+  double height;
+  CounterClock({@required this.height});
   @override
   _CounterClockState createState() => _CounterClockState();
 }
@@ -10,26 +14,37 @@ class _CounterClockState extends State<CounterClock> {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        Expanded(child: ClockCard()),
-        Expanded(child: ClockCard()),
+        Expanded(
+            child: ClockCard(
+          height: widget.height,
+        )),
+        Expanded(
+            child: ClockCard(
+          height: widget.height,
+        )),
         Text(
           ":",
           style: TextStyle(
               fontSize: 50,
               fontWeight: FontWeight.w300,
-              color: Colors.grey[500]),
+              color: Colors.grey[600]),
         ),
-        Expanded(child: ClockCard()),
-        Expanded(child: ClockCard()),
+        Expanded(
+            child: ClockCard(
+          height: widget.height,
+        )),
+        Expanded(
+            child: ClockCard(
+          height: widget.height,
+        )),
       ],
     );
   }
 }
 
 class ClockCard extends StatefulWidget {
-  // final double cardPaddingY;
-  // final double cardPaddingX;
-  // ClockCard({@required this.cardPaddingX, @required this.cardPaddingY});
+  double height;
+  ClockCard({@required this.height});
   @override
   _ClockCardState createState() => _ClockCardState();
 }
@@ -68,7 +83,7 @@ class _ClockCardState extends State<ClockCard> {
           _pressing = false;
         },
         child: Container(
-          height: 100,
+          height: widget.height * MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
@@ -80,7 +95,7 @@ class _ClockCardState extends State<ClockCard> {
               child: Text(
             "$_length",
             style: TextStyle(
-                color: Colors.grey[500],
+                color: Colors.grey[600],
                 fontSize: 70,
                 fontWeight: FontWeight.w200,
                 fontFamily: 'Digital'),
