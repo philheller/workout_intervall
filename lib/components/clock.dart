@@ -1,49 +1,71 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:workout_intervaller/data/sizeConfig.dart';
 
 class CounterClock extends StatefulWidget {
-  double height;
-  CounterClock({@required this.height});
+  final double height;
+  final String title;
+  CounterClock({@required this.height, @required this.title});
   @override
   _CounterClockState createState() => _CounterClockState();
 }
 
 class _CounterClockState extends State<CounterClock> {
+  void _startCounter() {}
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Expanded(
-            child: ClockCard(
-          height: widget.height,
-        )),
-        Expanded(
-            child: ClockCard(
-          height: widget.height,
-        )),
-        Text(
-          ":",
-          style: TextStyle(
-              fontSize: 50,
-              fontWeight: FontWeight.w300,
-              color: Colors.grey[600]),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: GestureDetector(
+            onTap: () {
+              _startCounter();
+            },
+            child: Text(
+              widget.title,
+              style: TextStyle(
+                fontSize:
+                    SizeConfig.textScaleFactor * SizeConfig.screenWidth * 0.07,
+                color: Colors.grey[600],
+              ),
+            ),
+          ),
         ),
-        Expanded(
-            child: ClockCard(
-          height: widget.height,
-        )),
-        Expanded(
-            child: ClockCard(
-          height: widget.height,
-        )),
+        Row(
+          children: <Widget>[
+            Expanded(
+                child: ClockCard(
+              height: widget.height,
+            )),
+            Expanded(
+                child: ClockCard(
+              height: widget.height,
+            )),
+            Text(
+              ":",
+              style: TextStyle(
+                  fontSize: 50,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.grey[600]),
+            ),
+            Expanded(
+                child: ClockCard(
+              height: widget.height,
+            )),
+            Expanded(
+                child: ClockCard(
+              height: widget.height,
+            )),
+          ],
+        ),
       ],
     );
   }
 }
 
 class ClockCard extends StatefulWidget {
-  double height;
+  final double height;
   ClockCard({@required this.height});
   @override
   _ClockCardState createState() => _ClockCardState();

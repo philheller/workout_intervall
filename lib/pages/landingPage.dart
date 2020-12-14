@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:workout_intervaller/components/blockTitle.dart';
 import 'package:workout_intervaller/components/clock.dart';
 import 'package:workout_intervaller/components/customAppBar.dart';
+import 'package:workout_intervaller/data/sizeConfig.dart';
 
 class LandingPage extends StatefulWidget {
   @override
@@ -11,6 +11,7 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
+  bool workout_not_pause = true;
   bool isPlaying = false;
 
   @override
@@ -34,11 +35,17 @@ class _LandingPageState extends State<LandingPage>
       isPlaying
           ? _animationController.forward()
           : _animationController.reverse();
+      _startCounters();
     });
+  }
+
+  void _startCounters() {
+    // workout_not_pause ?
   }
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
@@ -57,54 +64,41 @@ class _LandingPageState extends State<LandingPage>
             CustomAppBar(
               title: "Work harder!",
               secondaryMsg: "Interval workout",
-              height: 0.25,
+              height: SizeConfig.screenHeight * 0.25,
             ),
             Padding(
               padding: EdgeInsets.symmetric(
                   vertical: MediaQuery.of(context).size.height * 0.04),
               child: Column(
                 children: <Widget>[
-                  BlockTitle(
-                    title: "Interval Time",
-                  ),
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: MediaQuery.of(context).size.width * 0.07),
                     child: CounterClock(
-                      height: 0.12,
-                    ),
-                  ),
-                  SizedBox(height: 50),
-                  BlockTitle(
-                    title: "Pause Time",
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width * 0.07),
-                    child: CounterClock(
+                      title: "Interval Time",
                       height: 0.12,
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
-                        vertical: MediaQuery.of(context).size.height * 0.04),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          iconSize: 75,
-                          icon: AnimatedIcon(
-                            icon: AnimatedIcons.play_pause,
-                            progress: _animationController,
-                            color: Color.fromRGBO(150, 23, 20, 1),
-                          ),
-                          onPressed: () {
-                            _handleOnPressed();
-                          },
-                        ),
-                      ],
+                        horizontal: MediaQuery.of(context).size.width * 0.07),
+                    child: CounterClock(
+                      title: "Pause",
+                      height: 0.12,
                     ),
+                  ),
+                  IconButton(
+                    iconSize: SizeConfig.textScaleFactor *
+                        SizeConfig.screenHeight *
+                        0.1,
+                    icon: AnimatedIcon(
+                      icon: AnimatedIcons.play_pause,
+                      progress: _animationController,
+                      color: Color.fromRGBO(150, 23, 20, 1),
+                    ),
+                    onPressed: () {
+                      _handleOnPressed();
+                    },
                   ),
                 ],
               ),

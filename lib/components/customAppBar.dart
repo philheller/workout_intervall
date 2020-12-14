@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_intervaller/data/sizeConfig.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String title;
@@ -12,17 +13,22 @@ class CustomAppBar extends StatelessWidget {
     customList.add(Text(
       this.title,
       style: TextStyle(
-          fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
+        fontSize: SizeConfig.screenWidth * 0.1 * SizeConfig.textScaleFactor,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
     ));
     if (secondaryMsg != null) {
       customList.add(
         Text(
           this.secondaryMsg,
           style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.w300,
-              letterSpacing: 3,
-              color: Colors.white),
+            fontSize:
+                SizeConfig.screenWidth * 0.05 * SizeConfig.textScaleFactor,
+            fontWeight: FontWeight.w300,
+            letterSpacing: 3,
+            color: Colors.white,
+          ),
         ),
       );
     }
@@ -36,7 +42,7 @@ class CustomAppBar extends StatelessWidget {
     return ClipPath(
       clipper: LinePath(),
       child: Container(
-        height: MediaQuery.of(context).size.height * this.height,
+        height: this.height,
         alignment: Alignment.topLeft,
         decoration: BoxDecoration(
             gradient: RadialGradient(
